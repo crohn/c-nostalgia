@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -std=c99
 DIR_SRC = src
 DIR_DIST = dist
 
-.PHONY: kr-%
+.PHONY: kr-% clean
 
 kr-%:
 	$(eval PARTS := $(subst -, ,$*))
@@ -15,3 +15,5 @@ kr-%:
 	$(eval TGT   := $(DIR_DIST)/ex-$(CHAP)_$(EX))
 	$(CC) $(CFLAGS) $(SRC) -o $(TGT)
 
+clean:
+	rm -f $(DIR_DIST)/*
