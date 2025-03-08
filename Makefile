@@ -16,4 +16,4 @@ kr-%:
 	$(CC) $(CFLAGS) $(SRC) -o $(TGT)
 
 clean:
-	rm -f $(DIR_DIST)/*
+	rm -rf $(DIR_DIST)/*
