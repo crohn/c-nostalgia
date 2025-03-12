@@ -6,10 +6,13 @@
 
 #include <stdio.h>
 
-#define SPACE_IN    1
-#define SPACE_OUT   0
+#define SPACE_IN    1 /* Currently processing spaces */
+#define SPACE_OUT   0 /* Currently processing non-spaces */
 
+/* Determine next state based on current character. */
 int next_state(char c);
+
+/* Determine if character should be printed based on current state. */
 int should_print(char c, int state);
 
 int main()
@@ -18,6 +21,7 @@ int main()
 
   state = SPACE_OUT;
 
+  /* Simple state machine to collapse consecutive spaces into a single space */
   while ((c = getchar()) != EOF) {
     if (should_print(c, state))
       putchar(c);
