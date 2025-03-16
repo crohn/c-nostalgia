@@ -7,6 +7,7 @@
 
 int main()
 {
+  /* EOF -> -1 */
   printf("%d\n", EOF);
   return 0;
 }

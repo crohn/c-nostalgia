@@ -13,14 +13,14 @@
  * */
 
 #include <stdio.h>
+#include "kr_common.h"
+
 
 #define TABSTOP     8
 
-#define C_NEWLINE   '\n'
-#define C_SPACE     ' '
-#define C_TAB       '\t'
-
-int spaces_to_tabstop(int col);
+int next_col(char c, int col, int spaces);
+int spaces_to_tabstop(char c, int col);
+void print(char c, int spaces);
 
 int main()
 {
@@ -31,28 +31,40 @@ int main()
   spaces = 0;
 
   while ((c = getchar()) != EOF) {
-    if (c == C_TAB) {
-      spaces = spaces_to_tabstop(col);
-    } else if (c == C_NEWLINE) {
-      col = 0;
-    } else {
-      ++col;
-    }
-
-    for (; spaces > 0; --spaces) {
-      ++col;
-      putchar(C_SPACE);
-    }
-
-    if (c != C_TAB)
-      putchar(c);
+    spaces = spaces_to_tabstop(c, col);
+    col = next_col(c, col, spaces);
+    print(c, spaces);
   }
 
   return 0;
 }
 
-int spaces_to_tabstop(int col)
+
+int next_col(char c, int col, int spaces){
+  if (c == KR_C_TAB)
+    return col + spaces;
+
+  if (c == KR_C_NEWLINE)
+    return 0;
+
+  return col + 1;
+}
+
+int spaces_to_tabstop(char c, int col)
 {
-  return TABSTOP - (col % TABSTOP);
+  if (c == KR_C_TAB)
+    return TABSTOP - (col % TABSTOP);
+  
+  return 0;
+}
+
+
+void print(char c, int spaces)
+{
+    for (; spaces > 0; --spaces)
+      putchar(KR_C_SPACE);
+
+    if (c != KR_C_TAB)
+      putchar(c);
 }
 

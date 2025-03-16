@@ -430,7 +430,6 @@ void handle_rparen(int line, int col)
 void handle_star(int line, int col)
 {
   extern int state;
-  int token = peek();
   int c;
 
   if (state & S_QUOTE || state & S_DQUOTE)
