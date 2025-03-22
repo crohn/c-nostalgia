@@ -5,17 +5,17 @@
  * other bits unchanged. */
 
 #include <stdio.h>
+#include "kr_bitwise.h"
 
 unsigned setbits(unsigned x, int p, int n, unsigned y);
-void print_binary(unsigned x);
 
 int main()
 { 
-  print_binary(0x7ab4f0c9);
+  kr_print_binary(0x7ab4f0c9);
   printf("\n");
-  print_binary(0xffffea);
+  kr_print_binary(0xffffea);
   printf("\n");
-  print_binary(setbits(0x7ab4f0c9, 17, 5, 0xffffea));
+  kr_print_binary(setbits(0x7ab4f0c9, 17, 5, 0xffffea));
   printf("\n");
   return 0;
 }
@@ -50,19 +50,4 @@ unsigned setbits(unsigned x, int p, int n, unsigned y)
   return (x & ~mask) | ((y << shift_pos) & mask);
 }
 
-
-void print_binary(unsigned x)
-{
-  int i;
-  unsigned mask = ~(~0u >> 1);
-
-  i = 0;
-  while (mask > 0) {
-    printf("%c", x & mask ? '1' : '0');
-    mask = mask >> 1;
-
-    if (i++ % 4 == 3 && mask > 1)
-      printf(" ");
-  } 
-}
 
